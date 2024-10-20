@@ -333,15 +333,16 @@ locals {
 
       bootstrap_extra_args = "--kubelet-extra-args '${
         join(" ", [
-          "--node-labels=zeet.co/dedicated=dedicated,zeet.co/gpu=\"true\"",
+          "--node-labels=zeet.co/dedicated=dedicated,zeet.co/gpu=\"true\",zeet.co/accelerator=\"nvidia-tesla-t4\"",
           "--register-with-taints nvidia.com/gpu=present:NoSchedule",
         ])
       }'"
 
       // not used just for reference
       labels = {
-        "zeet.co/dedicated" = "dedicated"
-        "zeet.co/gpu"       = "true"
+        "zeet.co/dedicated"   = "dedicated"
+        "zeet.co/gpu"         = "true"
+        "zeet.co/accelerator" = "nvidia-tesla-t4"
       }
       taints = [
         {
@@ -349,7 +350,6 @@ locals {
           value  = "dedicated"
           effect = "NO_SCHEDULE"
         },
-
         {
           key    = "zeet.co/gpu"
           value  = "true"
@@ -385,16 +385,17 @@ locals {
 
       bootstrap_extra_args = "--kubelet-extra-args '${
         join(" ", [
-          "--node-labels=zeet.co/dedicated=dedicated,zeet.co/gpu=\"true\",zeet.co/gpu-type=\"nvidia-l4\"",
+          "--node-labels=zeet.co/dedicated=dedicated,zeet.co/gpu=\"true\",zeet.co/gpu-type=\"nvidia-l4\",zeet.co/accelerator=\"nvidia-l4\"",
           "--register-with-taints nvidia.com/gpu=present:NoSchedule",
         ])
       }'"
 
       // not used just for reference
       labels = {
-        "zeet.co/dedicated" = "dedicated"
-        "zeet.co/gpu"       = "true"
-        "zeet.co/gpu-type"  = "nvidia-l4"
+        "zeet.co/dedicated"   = "dedicated"
+        "zeet.co/gpu"         = "true"
+        "zeet.co/gpu-type"    = "nvidia-l4"
+        "zeet.co/accelerator" = "nvidia-l4"
       }
       taints = [
         {
